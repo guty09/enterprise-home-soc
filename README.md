@@ -19,6 +19,9 @@ Unlike isolated cybersecurity labs, this project is built as a continuously evol
 
 Every deployment, dashboard, detection, investigation, and architectural improvement is documented to demonstrate real-world security engineering practices.
 
+## Architecture
+
+![Enterprise Home SOC Architecture](architecture/network-diagram.png)
 ---
 
 # Project Objectives
@@ -37,33 +40,38 @@ Every deployment, dashboard, detection, investigation, and architectural improve
 
 # Current Lab Architecture
 
-```text
-                    Internet
-                        │
-            Cisco Firepower 1010 NGFW
-                        │
-                Netgear R7000 Router
-                        │
-             Cisco Catalyst 2100 Switch
-                        │
-        ┌───────────────┴───────────────┐
-        │                               │
- Windows Workstation              Future Linux
-     Sysmon                         Auditd
-        │                               │
-        └───────────────┬───────────────┘
-                        │
-          Splunk Universal Forwarder
-                        │
-                 Splunk Enterprise
-                        │
-        ┌───────────────┼────────────────┐
-        │               │                │
-   Dashboards     Detection Rules   Threat Hunting
-                        │
-               Incident Response
-```
+                    Enterprise Home SOC
 
+                        Internet
+                            │
+                  Cisco Firepower 1010
+                  Next-Generation Firewall
+                            │
+                     Netgear R7000
+                     Home Router
+                            │
+                  Cisco Catalyst 2100
+                         Switch
+                            │
+        ┌───────────────────┴───────────────────┐
+        │                                       │
+ Windows 11 Workstation                 Splunk Enterprise
+        │                               SIEM Platform
+        │
+   Sysmon Agent
+        │
+Splunk Universal Forwarder
+        │
+──────── Telemetry Pipeline ────────► Splunk Enterprise
+
+Future Log Sources
+
+• Linux (Auditd)
+• Cisco Firepower Syslog
+• Cisco Switch Logs
+• Wireless Access Point
+• Threat Intelligence
+• Cloud Logs
 ---
 
 # Technology Stack
