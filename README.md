@@ -1,306 +1,636 @@
-# Enterprise Home SOC
+Enterprise Home SOC
+Overview
 
-> A professional Security Operations Center (SOC) built in a home lab to develop and demonstrate Security Operations, Detection Engineering, SIEM Administration, Network Security, Threat Hunting, and Incident Response skills using enterprise technologies.
+The Enterprise Home SOC is a long-term cybersecurity engineering project designed to replicate the architecture, workflow, and operational responsibilities of an enterprise Security Operations Center (SOC). Rather than functioning as a simple virtual lab, this project focuses on building a reusable security platform capable of collecting, normalizing, monitoring, and investigating security telemetry from multiple enterprise technologies.
 
-![Project Status](https://img.shields.io/badge/Status-Phase%201%20Complete-brightgreen)
-![Platform](https://img.shields.io/badge/Platform-Windows-blue)
-![SIEM](https://img.shields.io/badge/SIEM-Splunk%20Enterprise-orange)
-![Telemetry](https://img.shields.io/badge/Endpoint-Sysmon-success)
-![Firewall](https://img.shields.io/badge/Firewall-Cisco%20Firepower-blue)
-![License](https://img.shields.io/badge/License-MIT-lightgrey)
+The primary objective is to demonstrate practical experience with technologies commonly used by Security Operations Centers, Detection Engineering teams, Blue Teams, and Security Engineering organizations. Every component is deployed, configured, documented, and validated as though it were supporting a production environment.
 
----
+The lab is being developed in multiple phases, with each phase introducing additional enterprise capabilities while maintaining reusable engineering standards throughout the project.
 
-# Project Overview
+Current development areas include:
 
-The Enterprise Home SOC is a long-term cybersecurity engineering project that simulates the design, deployment, and operation of a modern Security Operations Center.
+Enterprise SIEM Administration
+Endpoint Telemetry Collection
+Windows Security Monitoring
+Cisco Firewall Monitoring
+Detection Engineering
+Threat Hunting
+Incident Response
+Security Dashboard Engineering
+Knowledge Object Development
+Search-Time Data Normalization
 
-Unlike isolated cybersecurity labs, this project is built as a continuously evolving enterprise environment where endpoint telemetry, network visibility, detection engineering, threat hunting, and incident response are developed together.
+Unlike many home labs that simply demonstrate tool installation, this repository focuses on explaining how each technology was engineered, why specific design decisions were made, and how those decisions improve security operations.
 
-Every deployment, dashboard, detection, investigation, and architectural improvement is documented to demonstrate real-world security engineering practices.
+Every dashboard, field extraction, transformation, SPL search, and detection is treated as reusable engineering work rather than one-time demonstrations.
 
-## Architecture
+Project Goals
 
-![Enterprise Home SOC Architecture](architecture/network-diagram.png)
----
+This project was created to simulate the responsibilities performed by enterprise Security Operations teams while providing a structured environment for learning and documenting security engineering practices.
 
-# Project Objectives
+Major project goals include:
 
-- Build an enterprise-style Security Operations Center
-- Centralize endpoint and network telemetry
-- Develop custom Splunk dashboards
-- Engineer high-fidelity detections
-- Practice incident response
-- Perform proactive threat hunting
-- Integrate Cisco security infrastructure
-- Expand into wireless monitoring
-- Document every engineering decision
+Build an enterprise-style Security Operations Center
+Deploy and administer Splunk Enterprise
+Centralize endpoint and network telemetry
+Engineer reusable Splunk knowledge objects
+Normalize security events from multiple data sources
+Build operational SOC dashboards
+Develop custom SPL detections
+Perform threat hunting investigations
+Create incident response playbooks
+Document engineering decisions
+Demonstrate enterprise security administration
 
----
+Every completed phase becomes a reusable foundation for the next phase of development.
 
-# Current Lab Architecture
+Current Project Status
+✅ Phase 1 — Complete
 
-                    Enterprise Home SOC
+Enterprise logging infrastructure successfully deployed.
 
-                        Internet
-                            │
-                  Cisco Firepower 1010
-                  Next-Generation Firewall
-                            │
-                     Netgear R7000
-                     Home Router
-                            │
-                  Cisco Catalyst 2100
-                         Switch
-                            │
-        ┌───────────────────┴───────────────────┐
-        │                                       │
- Windows 11 Workstation                 Splunk Enterprise
-        │                               SIEM Platform
-        │
-   Sysmon Agent
-        │
+Completed work includes:
+
+Splunk Enterprise deployment
+Windows endpoint onboarding
+Splunk Universal Forwarder deployment
+Windows Security log ingestion
+Microsoft Sysmon deployment
+Sysmon configuration validation
+Dedicated Sysmon indexing
+Endpoint telemetry verification
+✅ Phase 2 — Complete
+
+Enterprise firewall monitoring successfully integrated.
+
+Completed work includes:
+
+Cisco Firepower syslog ingestion
+UDP syslog receiver configuration
+Search-time field normalization
+REPORT-based field extractions
+Reusable field transformations
+Cisco FTD knowledge objects
+Operational firewall dashboard
+Firewall analytics
+Event validation
+Dashboard engineering
+🚧 Phase 3 — In Progress
+
+Detection Engineering
+
+Planned work includes:
+
+Correlation searches
+Security alerts
+Detection rules
+Scheduled searches
+IOC monitoring
+Threat detections
+Alert prioritization
+Risk-based monitoring
+⏳ Future Phases
+
+Phase 4
+
+Threat Hunting and Incident Response
+
+Phase 5
+
+Enterprise Expansion
+
+Active Directory integration
+Linux telemetry
+Additional network devices
+Multi-source correlation
+Enterprise reporting
+Security automation
+Lab Architecture
+
+The Enterprise Home SOC combines endpoint telemetry with enterprise firewall monitoring to create a centralized security monitoring environment.
+
+At a high level, endpoint logs generated by Windows are forwarded to Splunk Enterprise using the Splunk Universal Forwarder. Microsoft Sysmon supplements native Windows Security logs by providing detailed process creation, network connections, registry activity, and file system telemetry.
+
+Network visibility is provided through a Cisco Firepower 1010 Next-Generation Firewall operating as the perimeter security device. Firewall events are exported using syslog and ingested directly into Splunk Enterprise where search-time knowledge objects normalize the telemetry into reusable fields.
+
+These normalized events become the foundation for dashboards, detections, investigations, and future correlation searches.
+
+The architecture intentionally separates telemetry collection from analysis, mirroring enterprise SOC deployments where multiple data sources are centralized into a SIEM platform.
+
+                         Internet
+                             │
+                    Cisco Firepower 1010
+                             │
+                    Cisco Catalyst Switch
+            ┌───────────────┼────────────────┐
+            │               │                │
+      Windows 11        Kali Linux      Rocky Linux
+            │
+     Splunk Universal Forwarder
+            │
+     Windows Security Logs
+            │
+          Sysmon
+            │
+      Splunk Enterprise
+            │
+ Dashboards │ Detections │ Threat Hunting
+Hardware Infrastructure
+
+The Enterprise Home SOC is built using dedicated networking hardware to simulate an enterprise environment rather than relying solely on virtual networking.
+
+Core Infrastructure
+Windows 11 Workstation
+Cisco Firepower 1010 NGFW
+Cisco Catalyst 2100 Switch
+Netgear R7000 Access Point
+Virtual Machines
+Kali Linux
+Rocky Linux
+Planned Systems
+Windows Active Directory
+Additional Linux Servers
+Enterprise Clients
+
+Software Stack
+
+The Enterprise Home SOC uses enterprise technologies commonly found in modern Security Operations Centers. Each component serves a specific purpose within the telemetry collection and monitoring pipeline while remaining modular enough to support future expansion.
+
+Security Information and Event Management (SIEM)
+Splunk Enterprise
+
+Splunk Enterprise serves as the central SIEM platform responsible for collecting, indexing, searching, analyzing, and visualizing security telemetry generated throughout the environment.
+
+Current responsibilities include:
+
+Log collection
+Event indexing
+Data normalization
+Search-time field extraction
+Dashboard visualization
+Security investigations
+Threat hunting
+Detection engineering
+Reporting
+
+As additional phases are completed, Splunk will also host scheduled correlation searches, alerting, incident workflows, and detection content.
+
+Endpoint Monitoring
+Microsoft Sysmon
+
+Microsoft Sysmon provides detailed endpoint telemetry beyond the native Windows Security Event Log.
+
+Sysmon captures valuable security events including:
+
+Process Creation
+Process Termination
+Network Connections
+Driver Loading
+Image Loading
+File Creation
+Registry Modifications
+Named Pipes
+WMI Activity
+DNS Queries
+Clipboard Access
+Process Access
+File Deletion
+
+Unlike standard Windows logs, Sysmon provides the level of visibility typically required for modern threat detection and forensic investigations.
+
+Windows Security Logs
+
+Native Windows Security auditing supplements Sysmon by recording operating system authentication and authorization events.
+
+Examples include:
+
+Successful Logons
+Failed Logons
+Account Lockouts
+Group Membership Changes
+Privilege Assignments
+User Creation
+Service Installation
+Policy Changes
+Credential Validation
+
+Together, Windows Security logs and Sysmon provide comprehensive endpoint visibility.
+
 Splunk Universal Forwarder
-        │
-──────── Telemetry Pipeline ────────► Splunk Enterprise
 
-Future Log Sources
+The Splunk Universal Forwarder is installed on monitored systems to securely transmit telemetry into Splunk Enterprise.
 
-• Linux (Auditd)
-• Cisco Firepower Syslog
-• Cisco Switch Logs
-• Wireless Access Point
-• Threat Intelligence
-• Cloud Logs
----
+Responsibilities include:
 
-# Technology Stack
+Endpoint log forwarding
+Reliable event delivery
+Bandwidth-efficient transmission
+Minimal endpoint resource usage
+Secure communication
 
-## SIEM
+The Universal Forwarder continuously monitors configured event sources and forwards new events in near real time.
 
-- Splunk Enterprise
+Network Security
+Cisco Firepower 1010
 
-## Endpoint Monitoring
+Network visibility is provided by a Cisco Firepower 1010 Next-Generation Firewall operating as the primary perimeter security device.
 
-- Sysmon
-- Windows Security Logs
-- Splunk Universal Forwarder
+Firewall telemetry includes:
 
-## Network Infrastructure
+Connection Events
+Access Control Policy Decisions
+Protocol Information
+Source Addresses
+Destination Addresses
+Source Ports
+Destination Ports
+Security Zones
+Interface Information
+Connection Duration
+ICMP Activity
+TCP Activity
+UDP Activity
 
-- Cisco Firepower 1010 (FDM)
-- Cisco Catalyst 2100
-- Netgear R7000
+These events provide valuable context that complements endpoint telemetry by showing how hosts communicate across the network.
 
-## Operating Systems
+Cisco Firepower Device Manager (FDM)
 
-- Windows 11
+Firewall administration is performed using Cisco Firepower Device Manager.
 
-## Future Integrations
+Configuration tasks include:
 
-- Linux Auditd
-- Wireless Monitoring
-- Threat Intelligence
-- Cloud Log Sources
+Access Control Policies
+Security Zones
+Interface Configuration
+Syslog Configuration
+Logging Levels
+Rule Management
+Object Management
+Routing
+NAT Policies
 
----
+Using FDM allows firewall configuration to remain separate from Splunk while exporting operational telemetry into the SIEM.
 
-# Current Capabilities
+Telemetry Pipeline
 
-## Endpoint Telemetry
+One of the primary goals of this project is building a reliable telemetry pipeline capable of supporting future detection engineering.
 
-- Windows Security Event Logs
-- Sysmon XML Events
-- Process Creation
-- Network Connections
-- DNS Queries
+The telemetry pipeline consists of several independent stages.
 
-## Splunk
+Stage 1 — Event Generation
 
-- Dedicated Sysmon Index
-- XML Event Parsing
-- Custom SPL Searches
-- Endpoint Visibility
+Security events originate from multiple sources throughout the lab.
 
----
+Examples include:
 
-# Verified Event Collection
+Windows
+User Logons
+Failed Authentication
+Process Creation
+Registry Activity
+File Activity
+Sysmon
+Network Connections
+Command Execution
+Process Trees
+DLL Loading
+Driver Loading
+Cisco Firepower
+Firewall Decisions
+Connection Events
+Protocol Metadata
+Access Control Rules
+Interface Activity
 
-## Windows Security
+Each system generates events independently.
 
-| Event ID | Description |
-|----------|-------------|
-|4624|Successful Logon|
-|4672|Special Privileges Assigned|
-|5379|Credential Manager Activity|
+Stage 2 — Event Collection
 
-## Sysmon
+Once generated, telemetry is collected using the appropriate collection mechanism.
 
-| Event ID | Description |
-|----------|-------------|
-|1|Process Creation|
-|3|Network Connection|
-|22|DNS Query|
+Windows endpoint events are forwarded using:
 
-Verified fields include:
+Splunk Universal Forwarder
 
-- Image
-- CommandLine
-- ParentImage
-- User
-- Hashes
-- DestinationIp
-- DestinationPort
-- QueryName
-- ProcessGuid
+Firewall events are exported using:
 
----
+UDP Syslog
 
-# Project Roadmap
+This separation reflects common enterprise deployments where endpoints and network infrastructure use different collection methods.
 
-## ✅ Phase 1 — SOC Foundation
+Stage 3 — Event Ingestion
 
-- Splunk Enterprise deployment
-- Sysmon deployment
-- Universal Forwarder deployment
-- Windows Security log ingestion
-- Dedicated Sysmon index
-- XML event parsing
-- Endpoint telemetry validation
-
----
-
-## 🚧 Phase 2 — Detection Engineering
-
-- Endpoint Overview Dashboard
-- Authentication Dashboard
-- Network Dashboard
-- PowerShell Monitoring
-- Custom SPL detections
-- Scheduled alerts
-- MITRE ATT&CK mapping
-
----
-
-## ⏳ Phase 3 — Network Visibility
-
-- Cisco Firepower syslog
-- Firewall dashboards
-- ACL monitoring
-- IPS events
-- VPN monitoring
-- Threat events
-
----
-
-## ⏳ Phase 4 — Wireless Monitoring
-
-- Wi-Fi authentication
-- Client associations
-- DHCP activity
-- DNS activity
-- Rogue AP detection
-
----
-
-## ⏳ Phase 5 — Enterprise Expansion
-
-- Linux Auditd
-- Threat Intelligence
-- Correlation Searches
-- Incident Response Playbooks
-- Threat Hunting
-- Cloud Security Monitoring
-
----
-
-# Planned Detection Library
-
-- Brute Force
-- Password Spray
-- Encoded PowerShell
-- Mimikatz
-- PsExec
-- LOLBins
-- Registry Persistence
-- Service Creation
-- Scheduled Tasks
-- Beaconing
-- Reverse Shells
-- Network Reconnaissance
-- Lateral Movement
-
-Each detection will include:
-
-- Objective
-- Detection Logic
-- SPL Query
-- MITRE ATT&CK Mapping
-- Validation
-- False Positives
-- Investigation Guide
-
----
-
-# Repository Structure
-
-```text
-enterprise-home-soc/
-
-├── architecture/
-├── assets/
-├── configs/
-├── dashboards/
-├── detections/
-├── docs/
-├── investigations/
-├── playbooks/
-└── screenshots/
-```
-
----
-
-# Skills Demonstrated
-
-- Security Operations (SOC)
-- SIEM Administration
-- Splunk Enterprise
-- Detection Engineering
-- Threat Hunting
-- Windows Internals
-- Sysmon
-- Cisco Network Security
-- Firewall Administration
-- Network Monitoring
-- Incident Response
-- MITRE ATT&CK
-- Security Engineering
-
----
-
-# Current Status
-
-**Enterprise Home SOC — Phase 1 Complete**
-
-The endpoint telemetry pipeline has been successfully deployed and validated. Current development is focused on enterprise dashboard creation, detection engineering, and alerting before expanding into Cisco network telemetry and wireless monitoring.
-
----
-
-# Future Repository Content
-
-As the project evolves, this repository will include:
-
-- Architecture diagrams
-- Dashboard documentation
-- Detection documentation
-- Investigation case studies
-- Incident response playbooks
-- Splunk SPL queries
-- Configuration examples
-- Screenshots
-- Engineering notes
-- Lessons learned
-
----
-
-> **This repository is actively maintained as a long-term cybersecurity engineering portfolio project documenting the design, deployment, operation, and continuous improvement of an Enterprise Home Security Operations Center.**
+Splunk Enterprise receives telemetry from multiple ingestion pipelines.
+
+Current ingestion methods include:
+
+Windows
+
+Splunk Forwarding
+
+TCP Port 9997
+
+Cisco Firepower
+
+Syslog Receiver
+
+UDP Port 5514
+
+Splunk indexes the incoming events while preserving raw event data for future analysis.
+
+Stage 4 — Search-Time Processing
+
+Rather than modifying incoming data during ingestion, Cisco Firepower events are normalized at search time.
+
+Search-time processing provides several advantages:
+
+Original events remain unchanged.
+Knowledge objects are reusable.
+Parsing logic can evolve without re-indexing data.
+Multiple searches can reuse the same normalized fields.
+Dashboards and detections remain consistent.
+
+This approach follows Splunk best practices for reusable engineering.
+
+Stage 5 — Field Normalization
+
+Raw Cisco Firepower events contain extensive key-value data.
+
+Field transformations convert this information into normalized fields used throughout the project.
+
+Examples include:
+
+Raw Value	Normalized Field
+SrcIP	SrcIP
+DstIP	DstIP
+SrcPort	SrcPort
+DstPort	DstPort
+Protocol	Protocol
+ConnectionID	ConnectionID
+AccessControlRuleAction	AccessControlRuleAction
+EventPriority	EventPriority
+IngressZone	IngressZone
+EgressZone	EgressZone
+
+Because these fields are normalized once, every dashboard, search, report, and future detection automatically benefits from the same engineering work.
+
+Stage 6 — Operational Use
+
+Once normalized, telemetry becomes immediately available for:
+
+Dashboards
+SPL Searches
+Reports
+Alerts
+Detection Rules
+Threat Hunting
+Incident Response
+Investigations
+Security Analytics
+
+This layered architecture allows the project to scale naturally as new telemetry sources and detection content are added.
+
+Phase 1 — SOC Foundation
+
+Phase 1 established the core infrastructure required to support enterprise security monitoring.
+
+Rather than immediately building dashboards or detections, the focus was placed on creating a reliable telemetry pipeline. A SIEM is only as valuable as the data it receives, so the first milestone was ensuring that endpoint telemetry was consistently collected, forwarded, indexed, and searchable.
+
+The Phase 1 implementation centered around four major components:
+
+Splunk Enterprise deployment
+Windows Security event collection
+Microsoft Sysmon deployment
+Splunk Universal Forwarder configuration
+
+Together, these components created the foundation that every subsequent phase relies upon.
+Splunk Enterprise Deployment
+
+Splunk Enterprise serves as the operational core of the Enterprise Home SOC. Every log source, dashboard, search, report, detection, and investigation ultimately relies on the SIEM platform to collect and organize security telemetry.
+
+The deployment was designed to emulate a small enterprise SOC while remaining manageable within a home lab. Rather than relying on demonstration data, the platform ingests live telemetry generated by systems operating within the environment.
+
+Current responsibilities include:
+
+Receiving telemetry from multiple sources
+Indexing raw events
+Providing centralized search capabilities
+Normalizing security data
+Building operational dashboards
+Supporting future detections
+Supporting threat hunting
+Supporting incident investigations
+
+Splunk Enterprise was intentionally selected because it remains one of the most widely deployed SIEM platforms in enterprise environments.
+
+Splunk Configuration
+
+The initial deployment focused on establishing a stable platform before introducing additional data sources.
+
+Core configuration tasks included:
+
+Splunk Enterprise installation
+Administrative account configuration
+Local indexing validation
+Network connectivity validation
+TCP receiving configuration
+UDP syslog configuration
+Index verification
+Search validation
+
+Before any dashboards or detections were developed, every ingestion pipeline was tested independently to ensure reliable event collection.
+
+Windows Event Collection
+
+The first telemetry source integrated into the SOC was the Windows Security Event Log.
+
+Native Windows auditing provides valuable authentication and authorization data that forms the basis of many enterprise security investigations.
+
+Examples of monitored activity include:
+
+Authentication
+
+Successful Logons
+Failed Logons
+Logoffs
+Credential Validation
+
+Account Management
+
+User Creation
+User Deletion
+Group Membership Changes
+Password Changes
+
+Privilege Activity
+
+Special Privileges Assigned
+Administrative Logons
+Policy Changes
+
+System Activity
+
+Service Installation
+Scheduled Tasks
+Security Policy Updates
+
+Collecting these events established a baseline for endpoint visibility before introducing enhanced telemetry.
+
+Sysmon Deployment
+
+Although Windows Security logs provide valuable information, they do not expose many of the low-level events required for modern detection engineering.
+
+Microsoft Sysmon was deployed to significantly expand endpoint visibility.
+
+Sysmon continuously records operating system activity that would otherwise be unavailable through default Windows auditing.
+
+Telemetry includes:
+
+Process Activity
+
+Process Creation
+Parent Process Relationships
+Command-Line Arguments
+Process GUIDs
+
+Network Activity
+
+Outbound Connections
+Destination Addresses
+Destination Ports
+Protocol Information
+
+Registry Monitoring
+
+Registry Key Creation
+Registry Modification
+Registry Deletion
+
+File Monitoring
+
+File Creation
+File Deletion
+File Time Changes
+
+Driver Monitoring
+
+Driver Loading
+Image Loading
+
+Additional Security Events
+
+DNS Queries
+Clipboard Access
+WMI Activity
+Pipe Creation
+Pipe Connections
+
+This additional telemetry dramatically improves visibility during investigations and enables future behavioral detections.
+
+Splunk Universal Forwarder
+
+To centralize endpoint telemetry, the Splunk Universal Forwarder was installed on the Windows workstation.
+
+The Universal Forwarder continuously monitors configured log sources and forwards newly generated events to Splunk Enterprise.
+
+Configured inputs include:
+
+Windows Security
+Sysmon Operational Log
+
+Forwarding destination:
+
+Splunk Enterprise
+TCP 9997
+
+This architecture mirrors enterprise environments where lightweight forwarders transmit telemetry to centralized indexing infrastructure.
+
+Telemetry Validation
+
+Collecting telemetry is only the first step.
+
+Each data source must also be validated to ensure events are searchable, complete, and consistently indexed.
+
+Validation activities included:
+
+Windows Security
+
+Successful Logons
+Failed Logons
+Administrative Logons
+Privilege Assignments
+
+Sysmon
+
+Process Creation
+Network Connections
+Registry Activity
+File Activity
+
+Searches confirmed:
+
+Events successfully indexed
+Correct sourcetypes
+Accurate timestamps
+Searchable fields
+Continuous event flow
+
+Only after validation was complete did development move to dashboard engineering.
+
+Engineering Decision
+Why Build the Telemetry Pipeline First?
+
+Many lab environments begin by creating dashboards immediately after installing Splunk.
+
+This project intentionally followed the opposite approach.
+
+The objective was to build a reliable telemetry pipeline before developing visualizations or detections.
+
+Reasons include:
+
+Reliable telemetry produces reliable detections.
+Dashboards are only useful when backed by trustworthy data.
+Search-time engineering depends on consistent event formats.
+Detection engineering should never compensate for poor data quality.
+
+Establishing a stable ingestion pipeline reduced troubleshooting later in the project and created reusable infrastructure for future phases.
+
+Phase 1 Accomplishments
+
+By the conclusion of Phase 1, the Enterprise Home SOC had successfully implemented:
+
+✅ Splunk Enterprise deployment
+
+✅ Windows endpoint onboarding
+
+✅ Splunk Universal Forwarder
+
+✅ Windows Security log collection
+
+✅ Microsoft Sysmon deployment
+
+✅ Sysmon operational logging
+
+✅ Dedicated endpoint telemetry
+
+✅ Search validation
+
+✅ Reliable event ingestion
+
+✅ Foundation for future detection engineering
+
+Phase 1 transformed the environment from an isolated workstation into a centralized logging platform capable of supporting enterprise security monitoring.
+
+Transition to Phase 2
+
+With endpoint telemetry successfully deployed and validated, the next objective was to expand visibility beyond individual hosts.
+
+Enterprise SOC analysts require both endpoint and network telemetry to investigate security events effectively. While Sysmon provides detailed host-level visibility, it cannot determine how traffic is handled as it traverses the network perimeter.
+
+To address this gap, Cisco Firepower was integrated into the environment as the primary network security device.
+
+The addition of Cisco Firepower introduced a second telemetry source capable of providing firewall policy decisions, connection metadata, protocol information, interface activity, and network communications.
+
+Rather than simply forwarding raw syslog into Splunk, the project focused on engineering reusable search-time knowledge objects so that firewall events could be normalized, visualized, and reused throughout dashboards, investigations, and future detection content.
+
+This engineering effort became the primary focus of Phase 2 – Firewall Operations Dashboard.
