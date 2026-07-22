@@ -132,7 +132,7 @@ The architecture separates endpoint telemetry, network telemetry, and centralize
 
 Hardware Infrastructure
 
-![Physical Lab Rack](architecture/physical-rack.png)
+![Physical Lab Rack](architecture/physical-lab.png)
 
 *Enterprise Home SOC physical infrastructure built on dedicated enterprise hardware. The rack contains the Cisco Firepower 1010 NGFW, Cisco Catalyst switch, HP EliteDesk running Splunk Enterprise, and NAS storage used throughout this project.*
 
