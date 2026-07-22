@@ -409,7 +409,7 @@ Splunk Universal Forwarder configuration
 Together, these components created the foundation that every subsequent phase relies upon.
 Splunk Enterprise Deployment
 
-![Splunk Dashboard Overview](screenshots/dashboard-overview.png)
+![Splunk Dashboard](screenshots/01-dashboard-overview.png)
 
 
 Splunk Enterprise serves as the operational core of the Enterprise Home SOC. Every log source, dashboard, search, report, detection, and investigation ultimately relies on the SIEM platform to collect and organize security telemetry.
@@ -553,11 +553,11 @@ This architecture mirrors enterprise environments where lightweight forwarders t
 
 Telemetry Validation
 
-![Search Example](screenshots/search-example.png)
+![Firewall Operations Dashboard](screenshots/02-firewall-operations-analytics.png)
 
-![Field Extractions](screenshots/field-extractions.png)
+![Cisco FTD Field Extractions](screenshots/04-cisco-ftd-field-extraction.png)
 
-![Recent Events](screenshots/recent-events.png)
+![Recent Firewall Events](screenshots/03-recent-firewall-events.png)
 
 
 Collecting telemetry is only the first step.
