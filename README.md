@@ -117,25 +117,25 @@ These normalized events become the foundation for dashboards, detections, invest
 
 The architecture intentionally separates telemetry collection from analysis, mirroring enterprise SOC deployments where multiple data sources are centralized into a SIEM platform.
 
-                         Internet
-                             │
-                    Cisco Firepower 1010
-                             │
-                    Cisco Catalyst Switch
-            ┌───────────────┼────────────────┐
-            │               │                │
-      Windows 11        Kali Linux      Rocky Linux
-            │
-     Splunk Universal Forwarder
-            │
-     Windows Security Logs
-            │
-          Sysmon
-            │
-      Splunk Enterprise
-            │
- Dashboards │ Detections │ Threat Hunting
+## Enterprise Network Architecture
+
+The diagram below illustrates the overall architecture of the Enterprise Home SOC environment.
+
+<p align="center">
+  <img src="architecture/network-architecture.png" alt="Enterprise Network Architecture" width="100%">
+</p>
+
+The architecture separates endpoint telemetry, network telemetry, and centralized SIEM operations while following an enterprise-style monitoring workflow. Windows Security Logs and Microsoft Sysmon provide host visibility, Cisco Firepower provides perimeter network telemetry, and Splunk Enterprise centralizes collection, normalization, dashboards, alerting, and future detection engineering.
+
+
+
+
 Hardware Infrastructure
+
+![Physical Lab Rack](architecture/physical-rack.png)
+
+*Enterprise Home SOC physical infrastructure built on dedicated enterprise hardware. The rack contains the Cisco Firepower 1010 NGFW, Cisco Catalyst switch, HP EliteDesk running Splunk Enterprise, and NAS storage used throughout this project.*
+
 
 The Enterprise Home SOC is built using dedicated networking hardware to simulate an enterprise environment rather than relying solely on virtual networking.
 
@@ -273,6 +273,9 @@ Using FDM allows firewall configuration to remain separate from Splunk while exp
 
 Telemetry Pipeline
 
+![Telemetry Pipeline](architecture/telemetry-pipeline.png)
+
+
 One of the primary goals of this project is building a reliable telemetry pipeline capable of supporting future detection engineering.
 
 The telemetry pipeline consists of several independent stages.
@@ -405,6 +408,9 @@ Splunk Universal Forwarder configuration
 
 Together, these components created the foundation that every subsequent phase relies upon.
 Splunk Enterprise Deployment
+
+![Splunk Dashboard Overview](screenshots/dashboard-overview.png)
+
 
 Splunk Enterprise serves as the operational core of the Enterprise Home SOC. Every log source, dashboard, search, report, detection, and investigation ultimately relies on the SIEM platform to collect and organize security telemetry.
 
@@ -547,6 +553,13 @@ This architecture mirrors enterprise environments where lightweight forwarders t
 
 Telemetry Validation
 
+![Search Example](screenshots/search-example.png)
+
+![Field Extractions](screenshots/field-extractions.png)
+
+![Recent Events](screenshots/recent-events.png)
+
+
 Collecting telemetry is only the first step.
 
 Each data source must also be validated to ensure events are searchable, complete, and consistently indexed.
@@ -633,4 +646,7 @@ The addition of Cisco Firepower introduced a second telemetry source capable of 
 
 Rather than simply forwarding raw syslog into Splunk, the project focused on engineering reusable search-time knowledge objects so that firewall events could be normalized, visualized, and reused throughout dashboards, investigations, and future detection content.
 
-This engineering effort became the primary focus of Phase 2 – Firewall Operations Dashboard.
+This engineering effort became the primary focus of Phase 2 – Firewall Operations Dashboard
+
+![Firewall Dashboard](screenshots/dashboard-overview.png)
+.
