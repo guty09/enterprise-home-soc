@@ -648,5 +648,4 @@ Rather than simply forwarding raw syslog into Splunk, the project focused on eng
 
 This engineering effort became the primary focus of Phase 2 – Firewall Operations Dashboard
 
-![Firewall Dashboard](screenshots/dashboard-overview.png)
-.
+![Firewall Dashboard](screenshots/02-firewall-operations-analytics.png)
